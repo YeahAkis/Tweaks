@@ -4,7 +4,8 @@
   "package": "systems.brn.justteleportalready.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "DontHurtMePearlMixin"
+    "DontHurtMePearlMixin",
+    "JustTeleportAlreadyMixin"
   ],
   "injectors": {
     "defaultRequire": 1

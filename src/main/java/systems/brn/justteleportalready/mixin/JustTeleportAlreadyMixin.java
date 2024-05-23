@@ -21,7 +21,8 @@ public class JustTeleportAlreadyMixin {
         cir.setReturnValue(world.getGameRules().getInt(Entity_Portal_Cooldown));
     }
 
-    @Shadow protected int portalCooldown;
+    @Shadow
+    private int portalCooldown;
     @Inject(method = "tickPortalCooldown", at = @At(value = "RETURN"))
     private void tickPortalCooldown(CallbackInfo ci) {
         int maxCooldown = world.getGameRules().getInt(Entity_Portal_Cooldown);
