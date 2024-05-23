@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "systems.brn.justteleportalready.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "DontHurtMePearlMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

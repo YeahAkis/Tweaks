@@ -1,0 +1,16 @@
+package systems.brn.justteleportalready;
+
+import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
+import net.minecraft.world.GameRules;
+
+public class Justteleportalready implements ModInitializer {
+    public static final GameRules.Key<GameRules.IntRule> Entity_Portal_Cooldown =
+                GameRuleRegistry.register("entityPortalCooldown", GameRules.Category.MOBS, GameRuleFactory.createIntRule(300));
+    public static final GameRules.Key<GameRules.IntRule> Enderpearl_Damage =
+            GameRuleRegistry.register("enderpearlDamage", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(5));
+    @Override
+    public void onInitialize() {
+    }
+}
