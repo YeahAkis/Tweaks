@@ -1,23 +1,23 @@
 {
   "schemaVersion": 1,
-  "id": "justteleportalready",
+  "id": "tweaks",
   "version": "${version}",
-  "name": "justteleportalready",
+  "name": "tweaks",
   "description": "",
   "authors": [],
   "contact": {
-    "repo": "https://git.brn.systems/BRNSystems/justteleportalreadyatencryptor"
+    "repo": "https://git.brn.systems/BRNSystems/tweaks"
   },
   "license": "MIT",
-  "icon": "assets/justteleportalready/icon.png",
+  "icon": "assets/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "systems.brn.justteleportalready.Justteleportalready"
+      "systems.brn.tweaks.Tweaks"
     ]
   },
   "mixins": [
-    "justteleportalready.mixins.json"
+    "tweaks.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",

@@ -1,4 +1,4 @@
-package systems.brn.justteleportalready.mixin;
+package systems.brn.tweaks.mixin;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-import static systems.brn.justteleportalready.Justteleportalready.Enderpearl_Damage;
+import static systems.brn.tweaks.Tweaks.Enderpearl_Damage;
 
 @Mixin(net.minecraft.entity.projectile.thrown.EnderPearlEntity.class)
 public class DontHurtMePearlMixin {

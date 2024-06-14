@@ -1,4 +1,4 @@
-package systems.brn.justteleportalready.mixin;
+package systems.brn.tweaks.mixin;
 
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static systems.brn.justteleportalready.Justteleportalready.Entity_Portal_Cooldown;
+import static systems.brn.tweaks.Tweaks.Entity_Portal_Cooldown;
 
 @Mixin(net.minecraft.entity.Entity.class)
 public class JustTeleportAlreadyMixin {
