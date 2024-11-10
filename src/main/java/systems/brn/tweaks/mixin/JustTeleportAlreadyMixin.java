@@ -1,5 +1,6 @@
 package systems.brn.tweaks.mixin;
 
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -12,22 +13,28 @@ import static systems.brn.tweaks.Tweaks.Entity_Portal_Cooldown;
 
 @Mixin(net.minecraft.entity.Entity.class)
 public class JustTeleportAlreadyMixin {
-    @Shadow private World world;
+    @Shadow
+    private World world;
 
     @Inject(method = "getDefaultPortalCooldown",
             at = @At(value = "RETURN"),
             cancellable = true)
     private void getDefaultPortalCooldown(CallbackInfoReturnable<Integer> cir) {
-        cir.setReturnValue(world.getGameRules().getInt(Entity_Portal_Cooldown));
+        if (world instanceof ServerWorld sWorld) {
+            cir.setReturnValue(sWorld.getGameRules().getInt(Entity_Portal_Cooldown));
+        }
     }
 
     @Shadow
     private int portalCooldown;
+
     @Inject(method = "tickPortalCooldown", at = @At(value = "RETURN"))
     private void tickPortalCooldown(CallbackInfo ci) {
-        int maxCooldown = world.getGameRules().getInt(Entity_Portal_Cooldown);
-        if (portalCooldown > maxCooldown) {
-            portalCooldown = maxCooldown;
+        if (world instanceof ServerWorld sWorld) {
+            int maxCooldown = sWorld.getGameRules().getInt(Entity_Portal_Cooldown);
+            if (portalCooldown > maxCooldown) {
+                portalCooldown = maxCooldown;
+            }
         }
     }
 }
