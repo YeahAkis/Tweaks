@@ -26,4 +26,17 @@ public abstract class PlayerEntityMixin {
         }
         return original;
     }
+
+    @ModifyConstant(
+            method = "attack",
+            constant = @Constant(floatValue = 1.5F)
+    )
+    private float modifyCriticalMultiplier(float original) {
+        PlayerEntity player = (PlayerEntity)(Object)this;
+        if (player.getWorld() != null && player.getWorld() instanceof ServerWorld serverWorld) {
+            GameRules.IntRule rule = serverWorld.getGameRules().get(Tweaks.CRITICAL_MULTIPLIER);
+            return rule.get() / 100.0F;
+        }
+        return original;
+    }
 }

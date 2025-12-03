@@ -15,6 +15,9 @@ public class Tweaks implements ModInitializer {
     public static final GameRules.Key<GameRules.IntRule> SHIELD_AXE_COOLDOWN =
             GameRuleRegistry.register("shieldAxeCooldown", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(100, 0, Integer.MAX_VALUE));
 
+    public static final GameRules.Key<GameRules.IntRule> CRITICAL_MULTIPLIER =
+            GameRuleRegistry.register("criticalHitMultiplier", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(150, 0, Integer.MAX_VALUE));
+
     @Override
     public void onInitialize() {
     }
