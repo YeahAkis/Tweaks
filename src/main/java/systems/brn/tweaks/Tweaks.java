@@ -30,6 +30,12 @@ public class Tweaks implements ModInitializer {
     public static final GameRules.Key<GameRules.IntRule> ENDER_EYE_POP_CHANCE =
             GameRuleRegistry.register("enderEyePopChance", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(20, 0, 100));
 
+    public static final GameRules.Key<GameRules.IntRule> LEASH_BREAK_DISTANCE =
+            GameRuleRegistry.register("leashBreakDistance", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(10, 0, Integer.MAX_VALUE));
+
+    public static final GameRules.Key<GameRules.IntRule> LEASH_ELASTIC_DISTANCE =
+            GameRuleRegistry.register("leashElasticDistance", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(6, 0, Integer.MAX_VALUE));
+
     @Override
     public void onInitialize() {
     }
