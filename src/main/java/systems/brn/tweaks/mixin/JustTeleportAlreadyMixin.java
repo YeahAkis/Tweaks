@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static systems.brn.tweaks.Tweaks.Entity_Portal_Cooldown;
+import static systems.brn.tweaks.Tweaks.ENTITY_PORTAL_COOLDOWN;
 
 @Mixin(net.minecraft.entity.Entity.class)
 public class JustTeleportAlreadyMixin {
@@ -21,7 +21,7 @@ public class JustTeleportAlreadyMixin {
             cancellable = true)
     private void getDefaultPortalCooldown(CallbackInfoReturnable<Integer> cir) {
         if (world instanceof ServerWorld sWorld) {
-            cir.setReturnValue(sWorld.getGameRules().getInt(Entity_Portal_Cooldown));
+            cir.setReturnValue(sWorld.getGameRules().getInt(ENTITY_PORTAL_COOLDOWN));
         }
     }
 
@@ -31,7 +31,7 @@ public class JustTeleportAlreadyMixin {
     @Inject(method = "tickPortalCooldown", at = @At(value = "RETURN"))
     private void tickPortalCooldown(CallbackInfo ci) {
         if (world instanceof ServerWorld sWorld) {
-            int maxCooldown = sWorld.getGameRules().getInt(Entity_Portal_Cooldown);
+            int maxCooldown = sWorld.getGameRules().getInt(ENTITY_PORTAL_COOLDOWN);
             if (portalCooldown > maxCooldown) {
                 portalCooldown = maxCooldown;
             }
