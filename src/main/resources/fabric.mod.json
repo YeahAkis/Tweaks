@@ -2,11 +2,11 @@
   "schemaVersion": 1,
   "id": "tweaks",
   "version": "${version}",
-  "name": "tweaks",
-  "description": "",
-  "authors": [],
+  "name": "Tweaks",
+  "description": "Change some values in Minecraft using gamerules",
+  "authors": ["BRNSystems", "Akis"],
   "contact": {
-    "repo": "https://git.brn.systems/BRNSystems/tweaks"
+    "sources": "https://git.brn.systems/BRNSystems/tweaks"
   },
   "license": "MIT",
   "icon": "assets/icon.png",
