@@ -9,7 +9,7 @@ public class Tweaks implements ModInitializer {
     public static final GameRules.Key<GameRules.IntRule> Entity_Portal_Cooldown =
                 GameRuleRegistry.register("entityPortalCooldown", GameRules.Category.MOBS, GameRuleFactory.createIntRule(300));
     public static final GameRules.Key<GameRules.IntRule> Enderpearl_Damage =
-            GameRuleRegistry.register("enderpearlDamage", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(5));
+            GameRuleRegistry.register("enderPearlDamage", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(5));
     @Override
     public void onInitialize() {
     }
