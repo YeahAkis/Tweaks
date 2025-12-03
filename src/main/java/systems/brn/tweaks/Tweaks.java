@@ -27,6 +27,9 @@ public class Tweaks implements ModInitializer {
     public static final GameRules.Key<GameRules.IntRule> ENDER_PEARL_DIVERGENCE =
             GameRuleRegistry.register("enderPearlDivergence", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(100, 0, Integer.MAX_VALUE));
 
+    public static final GameRules.Key<GameRules.IntRule> ENDER_EYE_POP_CHANCE =
+            GameRuleRegistry.register("enderEyePopChance", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(20, 0, 100));
+
     @Override
     public void onInitialize() {
     }

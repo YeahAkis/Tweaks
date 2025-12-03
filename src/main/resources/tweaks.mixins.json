@@ -7,9 +7,11 @@
     "CreeperEntityMixin",
     "DontHurtMePearlMixin",
     "EnderPearlItemMixin",
+    "EyeOfEnderMixin",
     "JustTeleportAlreadyMixin",
     "PlayerEntityMixin",
-    "accessors.CreeperEntityAccessor"
+    "accessors.CreeperEntityAccessor",
+    "accessors.EyeOfEnderEntityAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
