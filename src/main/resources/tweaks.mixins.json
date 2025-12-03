@@ -6,6 +6,7 @@
   "mixins": [
     "CreeperEntityMixin",
     "DontHurtMePearlMixin",
+    "EnderPearlItemMixin",
     "JustTeleportAlreadyMixin",
     "PlayerEntityMixin",
     "accessors.CreeperEntityAccessor"
