@@ -4,9 +4,11 @@
   "package": "systems.brn.tweaks.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "CreeperEntityMixin",
     "DontHurtMePearlMixin",
     "JustTeleportAlreadyMixin",
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "accessors.CreeperEntityAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

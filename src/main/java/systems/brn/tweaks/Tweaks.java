@@ -18,6 +18,9 @@ public class Tweaks implements ModInitializer {
     public static final GameRules.Key<GameRules.IntRule> CRITICAL_MULTIPLIER =
             GameRuleRegistry.register("criticalHitMultiplier", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(150, 0, Integer.MAX_VALUE));
 
+    public static final GameRules.Key<GameRules.IntRule> CREEPER_FUSE_TIME =
+            GameRuleRegistry.register("creeperDefaultFuseTime", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(30, 0, Integer.MAX_VALUE));
+
     @Override
     public void onInitialize() {
     }
