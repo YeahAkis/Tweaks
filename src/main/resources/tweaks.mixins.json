@@ -9,6 +9,7 @@
     "EnderPearlItemMixin",
     "EyeOfEnderMixin",
     "JustTeleportAlreadyMixin",
+    "LeashableMixin",
     "PlayerEntityMixin",
     "accessors.CreeperEntityAccessor",
     "accessors.EyeOfEnderEntityAccessor"
