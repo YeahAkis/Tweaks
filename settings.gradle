@@ -4,6 +4,7 @@ pluginManagement {
         maven { url = 'https://maven.neoforged.net/releases' }
         maven { url = 'https://maven.minecraftforge.net/' }
         maven { url = 'https://repo.papermc.io/repository/maven-public/' }
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
         gradlePluginPortal()
     }
 }
@@ -11,6 +12,5 @@ pluginManagement {
 rootProject.name = 'tweaks'
 
 include 'fabric'
-include 'neoforge'
 include 'forge'
 include 'paper'

@@ -1,10 +1,17 @@
 plugins {
     id 'java'
-    id 'net.minecraftforge.gradle' version '[7.0.3,8)'
+    id 'net.minecraftforge.gradle'
+    id 'org.spongepowered.mixin' version '0.7.+'
 }
 
 base {
     archivesName = "${rootProject.mod_id}-forge"
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
 
 sourceSets.main {
@@ -17,25 +24,36 @@ minecraft {
 
     runs {
         configureEach {
-            workingDir = layout.projectDirectory.dir('run')
+            workingDirectory project.file('run')
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
         }
 
-        register('server') {
+        server {
             args '--nogui', '-mixin.config=tweaks.mixins.json'
+            mods {
+                "${rootProject.mod_id}" {
+                    source sourceSets.main
+                }
+            }
         }
     }
 }
 
+mixin {
+    add sourceSets.main, 'tweaks.refmap.json'
+    config 'tweaks.mixins.json'
+}
+
 repositories {
-    minecraft.mavenizer(it)
-    maven fg.forgeMaven
-    maven fg.minecraftLibsMaven
-    mavenCentral()
+    maven {
+        url = 'https://repo.spongepowered.org/repository/maven-public/'
+    }
 }
 
 dependencies {
-    implementation minecraft.dependency("net.minecraftforge:forge:${rootProject.minecraft_version}-${rootProject.forge_version}")
-    compileOnly 'org.spongepowered:mixin:0.8.5'
+    minecraft "net.minecraftforge:forge:${rootProject.minecraft_version}-${rootProject.forge_version}"
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
 processResources {
@@ -54,6 +72,7 @@ jar {
     manifest {
         attributes 'MixinConfigs': 'tweaks.mixins.json'
     }
+    finalizedBy 'reobfJar'
 }
 
 ext.publishFile = tasks.jar.archiveFile

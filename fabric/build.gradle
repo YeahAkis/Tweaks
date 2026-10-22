@@ -11,6 +11,12 @@ sourceSets.main {
     resources.srcDir '../common/src/main/resources'
 }
 
+loom {
+    mixin {
+        defaultRefmapName = 'tweaks.refmap.json'
+    }
+}
+
 dependencies {
     minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
     mappings loom.officialMojangMappings()
