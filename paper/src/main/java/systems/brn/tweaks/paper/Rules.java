@@ -1,59 +1,50 @@
 package systems.brn.tweaks.paper;
 
-import net.minecraft.world.flag.FeatureFlagSet;
-import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.gamerules.GameRule;
+import net.minecraft.world.level.gamerules.GameRuleCategory;
+import net.minecraft.world.level.gamerules.GameRules;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.CraftWorld;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.function.BiConsumer;
 
 public final class Rules {
-    public static GameRules.Key<GameRules.IntegerValue> ENTITY_PORTAL_COOLDOWN;
-    public static GameRules.Key<GameRules.IntegerValue> ENDER_PEARL_DAMAGE;
-    public static GameRules.Key<GameRules.IntegerValue> SHIELD_AXE_COOLDOWN;
-    public static GameRules.Key<GameRules.IntegerValue> CRITICAL_MULTIPLIER;
-    public static GameRules.Key<GameRules.IntegerValue> CREEPER_FUSE_TIME;
-    public static GameRules.Key<GameRules.IntegerValue> ENDER_PEARL_POWER;
-    public static GameRules.Key<GameRules.IntegerValue> ENDER_PEARL_DIVERGENCE;
-    public static GameRules.Key<GameRules.IntegerValue> ENDER_EYE_POP_CHANCE;
-    public static GameRules.Key<GameRules.IntegerValue> LEASH_BREAK_DISTANCE;
-    public static GameRules.Key<GameRules.IntegerValue> LEASH_ELASTIC_DISTANCE;
+    public static GameRule<Integer> ENTITY_PORTAL_COOLDOWN;
+    public static GameRule<Integer> ENDER_PEARL_DAMAGE;
+    public static GameRule<Integer> SHIELD_AXE_COOLDOWN;
+    public static GameRule<Integer> CRITICAL_MULTIPLIER;
+    public static GameRule<Integer> CREEPER_FUSE_TIME;
+    public static GameRule<Integer> ENDER_PEARL_POWER;
+    public static GameRule<Integer> ENDER_PEARL_DIVERGENCE;
+    public static GameRule<Integer> ENDER_EYE_POP_CHANCE;
+    public static GameRule<Integer> LEASH_BREAK_DISTANCE;
+    public static GameRule<Integer> LEASH_ELASTIC_DISTANCE;
 
     private Rules() {
     }
 
     public static void register() throws ReflectiveOperationException {
-        Method register = GameRules.class.getDeclaredMethod("register", String.class, GameRules.Category.class, GameRules.Type.class);
+        Method register = GameRules.class.getDeclaredMethod("registerInteger", String.class, GameRuleCategory.class, int.class, int.class, int.class);
         register.setAccessible(true);
-        Method create = GameRules.IntegerValue.class.getDeclaredMethod("create", int.class, int.class, int.class, FeatureFlagSet.class, BiConsumer.class);
-        create.setAccessible(true);
 
-        ENTITY_PORTAL_COOLDOWN = integer(register, create, "entityPortalCooldown", GameRules.Category.MOBS, 300, 0, Integer.MAX_VALUE);
-        ENDER_PEARL_DAMAGE = integer(register, create, "enderPearlDamage", GameRules.Category.PLAYER, 5, 0, Integer.MAX_VALUE);
-        SHIELD_AXE_COOLDOWN = integer(register, create, "shieldAxeCooldown", GameRules.Category.PLAYER, 100, 0, Integer.MAX_VALUE);
-        CRITICAL_MULTIPLIER = integer(register, create, "criticalHitMultiplier", GameRules.Category.PLAYER, 150, 0, Integer.MAX_VALUE);
-        CREEPER_FUSE_TIME = integer(register, create, "creeperDefaultFuseTime", GameRules.Category.MOBS, 30, 0, Integer.MAX_VALUE);
-        ENDER_PEARL_POWER = integer(register, create, "enderPearlPower", GameRules.Category.PLAYER, 150, 0, Integer.MAX_VALUE);
-        ENDER_PEARL_DIVERGENCE = integer(register, create, "enderPearlDivergence", GameRules.Category.PLAYER, 100, 0, Integer.MAX_VALUE);
-        ENDER_EYE_POP_CHANCE = integer(register, create, "enderEyePopChance", GameRules.Category.PLAYER, 20, 0, 100);
-        LEASH_BREAK_DISTANCE = integer(register, create, "leashBreakDistance", GameRules.Category.MOBS, 10, 0, Integer.MAX_VALUE);
-        LEASH_ELASTIC_DISTANCE = integer(register, create, "leashElasticDistance", GameRules.Category.MOBS, 6, 0, Integer.MAX_VALUE);
+        ENTITY_PORTAL_COOLDOWN = integer(register, "entity_portal_cooldown", GameRuleCategory.MOBS, 300, 0, Integer.MAX_VALUE);
+        ENDER_PEARL_DAMAGE = integer(register, "ender_pearl_damage", GameRuleCategory.PLAYER, 5, 0, Integer.MAX_VALUE);
+        SHIELD_AXE_COOLDOWN = integer(register, "shield_axe_cooldown", GameRuleCategory.PLAYER, 100, 0, Integer.MAX_VALUE);
+        CRITICAL_MULTIPLIER = integer(register, "critical_hit_multiplier", GameRuleCategory.PLAYER, 150, 0, Integer.MAX_VALUE);
+        CREEPER_FUSE_TIME = integer(register, "creeper_default_fuse_time", GameRuleCategory.MOBS, 30, 0, Integer.MAX_VALUE);
+        ENDER_PEARL_POWER = integer(register, "ender_pearl_power", GameRuleCategory.PLAYER, 150, 0, Integer.MAX_VALUE);
+        ENDER_PEARL_DIVERGENCE = integer(register, "ender_pearl_divergence", GameRuleCategory.PLAYER, 100, 0, Integer.MAX_VALUE);
+        ENDER_EYE_POP_CHANCE = integer(register, "ender_eye_pop_chance", GameRuleCategory.PLAYER, 20, 0, 100);
+        LEASH_BREAK_DISTANCE = integer(register, "leash_break_distance", GameRuleCategory.MOBS, 12, 0, Integer.MAX_VALUE);
+        LEASH_ELASTIC_DISTANCE = integer(register, "leash_elastic_distance", GameRuleCategory.MOBS, 6, 0, Integer.MAX_VALUE);
     }
 
     @SuppressWarnings("unchecked")
-    private static GameRules.Key<GameRules.IntegerValue> integer(Method register, Method create, String name, GameRules.Category category, int def, int min, int max) throws ReflectiveOperationException {
-        try {
-            Object type = create.invoke(null, def, min, max, FeatureFlagSet.of(), (BiConsumer<Object, Object>) (server, value) -> {
-            });
-            return (GameRules.Key<GameRules.IntegerValue>) register.invoke(null, name, category, type);
-        } catch (InvocationTargetException e) {
-            throw e;
-        }
+    private static GameRule<Integer> integer(Method register, String name, GameRuleCategory category, int def, int min, int max) throws ReflectiveOperationException {
+        return (GameRule<Integer>) register.invoke(null, name, category, def, min, max);
     }
 
-    public static int get(World world, GameRules.Key<GameRules.IntegerValue> key) {
-        return ((CraftWorld) world).getHandle().getGameRules().getInt(key);
+    public static int get(World world, GameRule<Integer> key) {
+        return ((CraftWorld) world).getHandle().getGameRules().get(key);
     }
 }
