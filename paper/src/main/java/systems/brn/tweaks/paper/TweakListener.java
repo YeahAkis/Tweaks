@@ -107,8 +107,8 @@ public class TweakListener implements Listener {
         if (power == 150 && divergence == 100) {
             return;
         }
-        var handle = ((org.bukkit.craftbukkit.entity.CraftEntity) pearl).getHandle();
-        var owner = ((org.bukkit.craftbukkit.entity.CraftEntity) shooter).getHandle();
+        var handle = ((org.bukkit.craftbukkit.v1_20_R1.entity.CraftEntity) pearl).getHandle();
+        var owner = ((org.bukkit.craftbukkit.v1_20_R1.entity.CraftEntity) shooter).getHandle();
         ((net.minecraft.world.entity.projectile.Projectile) handle)
                 .shootFromRotation(owner, owner.getXRot(), owner.getYRot(), 0.0F, power / 100.0F, divergence / 100.0F);
     }

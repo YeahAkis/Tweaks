@@ -2,10 +2,12 @@ package systems.brn.tweaks.paper;
 
 import net.minecraft.world.level.GameRules;
 import org.bukkit.World;
-import org.bukkit.craftbukkit.CraftWorld;
+import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.Arrays;
 import java.util.function.BiConsumer;
 
 public final class Rules {
@@ -24,10 +26,8 @@ public final class Rules {
     }
 
     public static void register() throws ReflectiveOperationException {
-        Method register = GameRules.class.getDeclaredMethod("register", String.class, GameRules.Category.class, GameRules.Type.class);
-        register.setAccessible(true);
-        Method create = GameRules.IntegerValue.class.getDeclaredMethod("create", int.class, int.class, int.class, BiConsumer.class);
-        create.setAccessible(true);
+        Method register = method(GameRules.class, GameRules.Key.class, String.class, GameRules.Category.class, GameRules.Type.class);
+        Method create = method(GameRules.IntegerValue.class, GameRules.Type.class, int.class, BiConsumer.class);
 
         ENTITY_PORTAL_COOLDOWN = integer(register, create, "entityPortalCooldown", GameRules.Category.MOBS, 300, 0, Integer.MAX_VALUE);
         ENDER_PEARL_DAMAGE = integer(register, create, "enderPearlDamage", GameRules.Category.PLAYER, 5, 0, Integer.MAX_VALUE);
@@ -41,10 +41,20 @@ public final class Rules {
         LEASH_ELASTIC_DISTANCE = integer(register, create, "leashElasticDistance", GameRules.Category.MOBS, 6, 0, Integer.MAX_VALUE);
     }
 
+    private static Method method(Class<?> owner, Class<?> returnType, Class<?>... parameters) throws NoSuchMethodException {
+        for (Method method : owner.getDeclaredMethods()) {
+            if (Modifier.isStatic(method.getModifiers()) && method.getReturnType() == returnType && Arrays.equals(method.getParameterTypes(), parameters)) {
+                method.setAccessible(true);
+                return method;
+            }
+        }
+        throw new NoSuchMethodException(owner.getName());
+    }
+
     @SuppressWarnings("unchecked")
     private static GameRules.Key<GameRules.IntegerValue> integer(Method register, Method create, String name, GameRules.Category category, int def, int min, int max) throws ReflectiveOperationException {
         try {
-            Object type = create.invoke(null, def, min, max, (BiConsumer<Object, Object>) (server, value) -> {
+            Object type = create.invoke(null, def, (BiConsumer<Object, Object>) (server, value) -> {
             });
             return (GameRules.Key<GameRules.IntegerValue>) register.invoke(null, name, category, type);
         } catch (InvocationTargetException e) {

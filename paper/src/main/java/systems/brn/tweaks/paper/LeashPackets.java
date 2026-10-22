@@ -7,7 +7,7 @@ import io.netty.channel.ChannelPromise;
 import net.minecraft.network.protocol.game.ClientboundSetEntityLinkPacket;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_20_R1.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
@@ -87,7 +87,7 @@ public final class LeashPackets extends ChannelDuplexHandler {
             return link.getDestId() == 0 && stretch != null && stretch.fresh(now);
         }
         if (msg instanceof ClientboundSoundPacket sound) {
-            String name = sound.getSound().getRegisteredName();
+            String name = sound.getSound().value().getLocation().toString();
             if (!name.contains(".lead.") && !name.contains("leash_knot")) {
                 return false;
             }
