@@ -11,3 +11,4 @@ pluginManagement {
 rootProject.name = 'tweaks'
 
 include 'fabric'
+include 'neoforge'
