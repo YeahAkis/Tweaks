@@ -1,0 +1,26 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "MIT"
+issueTrackerURL = "https://github.com/YeahAkis/Tweaks/issues"
+
+[[mods]]
+modId = "tweaks"
+version = "${version}"
+displayName = "Tweaks"
+authors = "BRNSystems, Akis"
+description = '''Change vanilla values like ender pearl damage, creeper fuse time and leash distance with real gamerules'''
+logoFile = "assets/tweaks/icon.png"
+
+[[dependencies.tweaks]]
+modId = "forge"
+mandatory = true
+versionRange = "[${forge},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.tweaks]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[${minecraft}]"
+ordering = "NONE"
+side = "BOTH"
