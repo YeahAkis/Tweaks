@@ -55,3 +55,9 @@ jar {
         attributes 'MixinConfigs': 'tweaks.mixins.json'
     }
 }
+
+ext.publishFile = tasks.jar.archiveFile
+ext.publishSuffix = 'forge'
+ext.publishLabel = 'Forge'
+ext.publishLoaders = ['forge']
+apply from: '../gradle/publish.gradle'

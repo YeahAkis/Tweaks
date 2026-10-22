@@ -29,3 +29,9 @@ processResources {
         expand props
     }
 }
+
+ext.publishFile = tasks.remapJar.archiveFile
+ext.publishSuffix = 'fabric'
+ext.publishLabel = 'Fabric and Quilt'
+ext.publishLoaders = ['fabric', 'quilt']
+apply from: '../gradle/publish.gradle'

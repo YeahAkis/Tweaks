@@ -1,4 +1,5 @@
 plugins {
+    id 'me.modmuss50.mod-publish-plugin' version '1.1.0' apply false
     id 'io.papermc.paperweight.userdev' version '2.0.0-beta.24' apply false
     id 'net.minecraftforge.gradle' version '[7.0.3,8)' apply false
     id 'net.neoforged.moddev' version '2.0.148' apply false

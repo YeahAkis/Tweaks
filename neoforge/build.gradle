@@ -40,3 +40,9 @@ processResources {
         expand props
     }
 }
+
+ext.publishFile = tasks.jar.archiveFile
+ext.publishSuffix = 'neoforge'
+ext.publishLabel = 'NeoForge'
+ext.publishLoaders = ['neoforge']
+apply from: '../gradle/publish.gradle'
