@@ -3,7 +3,6 @@ package systems.brn.tweaks.paper;
 import com.destroystokyo.paper.event.entity.EntityAddToWorldEvent;
 import io.papermc.paper.event.player.PlayerItemCooldownEvent;
 import org.bukkit.Material;
-import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.EnderSignal;
@@ -20,8 +19,10 @@ import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.EntityUnleashEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.entity.PlayerLeashEntityEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.plugin.Plugin;
 
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -31,6 +32,7 @@ public class TweakListener implements Listener {
     private static final int VANILLA_PORTAL_COOLDOWN = 300;
 
     private final Set<UUID> watched = ConcurrentHashMap.newKeySet();
+    private final Map<UUID, Long> pearlLandings = new ConcurrentHashMap<>();
     private final Plugin plugin;
 
     public TweakListener(Plugin plugin) {
@@ -66,9 +68,20 @@ public class TweakListener implements Listener {
         }
     }
 
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onPearlTeleport(PlayerTeleportEvent event) {
+        if (event.getCause() == PlayerTeleportEvent.TeleportCause.ENDER_PEARL) {
+            pearlLandings.put(event.getPlayer().getUniqueId(), event.getPlayer().getWorld().getGameTime());
+        }
+    }
+
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onDamage(EntityDamageEvent event) {
-        if (event.getDamageSource().getDamageType() != DamageType.ENDER_PEARL) {
+        if (event.getCause() != EntityDamageEvent.DamageCause.FALL) {
+            return;
+        }
+        Long landed = pearlLandings.remove(event.getEntity().getUniqueId());
+        if (landed == null || landed != event.getEntity().getWorld().getGameTime()) {
             return;
         }
         int damage = Rules.get(event.getEntity().getWorld(), Rules.ENDER_PEARL_DAMAGE);

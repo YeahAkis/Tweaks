@@ -1,6 +1,5 @@
 package systems.brn.tweaks.paper;
 
-import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.level.GameRules;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.CraftWorld;
@@ -27,7 +26,7 @@ public final class Rules {
     public static void register() throws ReflectiveOperationException {
         Method register = GameRules.class.getDeclaredMethod("register", String.class, GameRules.Category.class, GameRules.Type.class);
         register.setAccessible(true);
-        Method create = GameRules.IntegerValue.class.getDeclaredMethod("create", int.class, int.class, int.class, FeatureFlagSet.class, BiConsumer.class);
+        Method create = GameRules.IntegerValue.class.getDeclaredMethod("create", int.class, int.class, int.class, BiConsumer.class);
         create.setAccessible(true);
 
         ENTITY_PORTAL_COOLDOWN = integer(register, create, "entityPortalCooldown", GameRules.Category.MOBS, 300, 0, Integer.MAX_VALUE);
@@ -45,7 +44,7 @@ public final class Rules {
     @SuppressWarnings("unchecked")
     private static GameRules.Key<GameRules.IntegerValue> integer(Method register, Method create, String name, GameRules.Category category, int def, int min, int max) throws ReflectiveOperationException {
         try {
-            Object type = create.invoke(null, def, min, max, FeatureFlagSet.of(), (BiConsumer<Object, Object>) (server, value) -> {
+            Object type = create.invoke(null, def, min, max, (BiConsumer<Object, Object>) (server, value) -> {
             });
             return (GameRules.Key<GameRules.IntegerValue>) register.invoke(null, name, category, type);
         } catch (InvocationTargetException e) {
