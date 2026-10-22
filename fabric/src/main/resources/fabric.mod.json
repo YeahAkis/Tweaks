@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "tweaks",
+  "version": "${version}",
+  "name": "Tweaks",
+  "description": "Change vanilla values like ender pearl damage, creeper fuse time and leash distance with real gamerules",
+  "authors": ["BRNSystems", "Akis"],
+  "contact": {
+    "sources": "https://github.com/YeahAkis/Tweaks",
+    "issues": "https://github.com/YeahAkis/Tweaks/issues"
+  },
+  "license": "MIT",
+  "icon": "assets/tweaks/icon.png",
+  "environment": "*",
+  "mixins": [
+    "tweaks.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader}",
+    "minecraft": "${minecraft}",
+    "java": ">=${java}"
+  }
+}
