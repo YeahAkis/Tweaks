@@ -4,19 +4,27 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Leashable;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.Constant;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import systems.brn.tweaks.Rules;
 
 @Mixin(Leashable.class)
 public interface LeashableMixin {
-    @ModifyConstant(method = "tickLeash", constant = @Constant(doubleValue = 10.0))
-    private static double tweaks$breakDistance(double original, ServerLevel level, Entity entity) {
-        return level.getGameRules().getInt(Rules.LEASH_BREAK_DISTANCE);
+    @Redirect(method = "tickLeash", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Leashable;leashSnapDistance()D"))
+    private static double tweaks$breakDistance(Leashable leashable) {
+        double original = leashable.leashSnapDistance();
+        if (original == 12.0 && ((Entity) leashable).level() instanceof ServerLevel level) {
+            return level.getGameRules().getInt(Rules.LEASH_BREAK_DISTANCE);
+        }
+        return original;
     }
 
-    @ModifyConstant(method = "tickLeash", constant = @Constant(doubleValue = 6.0))
-    private static double tweaks$elasticDistance(double original, ServerLevel level, Entity entity) {
-        return level.getGameRules().getInt(Rules.LEASH_ELASTIC_DISTANCE);
+    @Redirect(method = "tickLeash", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Leashable;leashElasticDistance()D"))
+    private static double tweaks$elasticDistance(Leashable leashable) {
+        double original = leashable.leashElasticDistance();
+        if (original == 6.0 && ((Entity) leashable).level() instanceof ServerLevel level) {
+            return level.getGameRules().getInt(Rules.LEASH_ELASTIC_DISTANCE);
+        }
+        return original;
     }
 }

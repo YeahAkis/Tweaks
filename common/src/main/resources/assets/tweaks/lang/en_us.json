@@ -16,7 +16,7 @@
   "gamerule.enderEyePopChance": "Eye of ender pop chance",
   "gamerule.enderEyePopChance.description": "Percent chance for a thrown eye of ender to break instead of dropping, 20 is vanilla",
   "gamerule.leashBreakDistance": "Leash break distance",
-  "gamerule.leashBreakDistance.description": "Distance in blocks at which a leash snaps, 10 is vanilla",
+  "gamerule.leashBreakDistance.description": "Distance in blocks at which a leash snaps, 12 is vanilla",
   "gamerule.leashElasticDistance": "Leash elastic distance",
   "gamerule.leashElasticDistance.description": "Distance in blocks at which a leash starts pulling its mob, 6 is vanilla"
 }

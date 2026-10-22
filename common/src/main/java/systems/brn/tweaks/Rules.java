@@ -35,7 +35,7 @@ public final class Rules {
         ENDER_PEARL_POWER = integer("enderPearlPower", GameRules.Category.PLAYER, 150, 0, Integer.MAX_VALUE);
         ENDER_PEARL_DIVERGENCE = integer("enderPearlDivergence", GameRules.Category.PLAYER, 100, 0, Integer.MAX_VALUE);
         ENDER_EYE_POP_CHANCE = integer("enderEyePopChance", GameRules.Category.PLAYER, 20, 0, 100);
-        LEASH_BREAK_DISTANCE = integer("leashBreakDistance", GameRules.Category.MOBS, 10, 0, Integer.MAX_VALUE);
+        LEASH_BREAK_DISTANCE = integer("leashBreakDistance", GameRules.Category.MOBS, 12, 0, Integer.MAX_VALUE);
         LEASH_ELASTIC_DISTANCE = integer("leashElasticDistance", GameRules.Category.MOBS, 6, 0, Integer.MAX_VALUE);
     }
 
