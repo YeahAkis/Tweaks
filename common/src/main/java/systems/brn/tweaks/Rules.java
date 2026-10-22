@@ -39,7 +39,7 @@ public final class Rules {
     }
 
     private static GameRules.Key<GameRules.IntegerValue> integer(String name, GameRules.Category category, int def, int min, int max) {
-        return GameRulesInvoker.tweaks$register(name, category, IntegerValueInvoker.tweaks$create(def, min, max, (server, value) -> {
+        return GameRulesInvoker.tweaks$register(name, category, IntegerValueInvoker.tweaks$create(def, (server, value) -> {
         }));
     }
 }

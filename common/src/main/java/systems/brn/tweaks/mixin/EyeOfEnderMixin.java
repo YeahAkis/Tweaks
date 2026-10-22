@@ -21,7 +21,7 @@ public abstract class EyeOfEnderMixin {
         Entity self = (Entity) (Object) this;
         if (self.level() instanceof ServerLevel level) {
             int chance = level.getGameRules().getInt(Rules.ENDER_EYE_POP_CHANCE);
-            this.surviveAfterDeath = self.getRandom().nextInt(100) >= chance;
+            this.surviveAfterDeath = level.getRandom().nextInt(100) >= chance;
         }
     }
 }

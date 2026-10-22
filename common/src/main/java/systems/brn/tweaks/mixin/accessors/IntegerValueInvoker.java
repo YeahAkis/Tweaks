@@ -10,7 +10,7 @@ import java.util.function.BiConsumer;
 @Mixin(GameRules.IntegerValue.class)
 public interface IntegerValueInvoker {
     @Invoker("create")
-    static GameRules.Type<GameRules.IntegerValue> tweaks$create(int def, int min, int max, BiConsumer<MinecraftServer, GameRules.IntegerValue> changeListener) {
+    static GameRules.Type<GameRules.IntegerValue> tweaks$create(int def, BiConsumer<MinecraftServer, GameRules.IntegerValue> changeListener) {
         throw new AssertionError();
     }
 }
