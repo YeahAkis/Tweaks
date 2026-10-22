@@ -4,6 +4,7 @@
   "package": "systems.brn.tweaks.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "BlocksAttacksMixin",
     "CreeperMixin",
     "EnderPearlDamageMixin",
     "EnderpearlItemMixin",
