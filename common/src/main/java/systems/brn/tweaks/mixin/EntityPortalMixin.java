@@ -21,14 +21,14 @@ public abstract class EntityPortalMixin {
     @Inject(method = "getDimensionChangingDelay", at = @At("RETURN"), cancellable = true)
     private void tweaks$delay(CallbackInfoReturnable<Integer> cir) {
         if (level() instanceof ServerLevel level) {
-            cir.setReturnValue(level.getGameRules().getInt(Rules.ENTITY_PORTAL_COOLDOWN));
+            cir.setReturnValue(level.getGameRules().get(Rules.ENTITY_PORTAL_COOLDOWN));
         }
     }
 
     @Inject(method = "processPortalCooldown", at = @At("RETURN"))
     private void tweaks$clamp(CallbackInfo ci) {
         if (level() instanceof ServerLevel level) {
-            int max = level.getGameRules().getInt(Rules.ENTITY_PORTAL_COOLDOWN);
+            int max = level.getGameRules().get(Rules.ENTITY_PORTAL_COOLDOWN);
             if (portalCooldown > max) {
                 portalCooldown = max;
             }

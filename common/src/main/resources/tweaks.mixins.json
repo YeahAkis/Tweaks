@@ -4,6 +4,7 @@
   "package": "systems.brn.tweaks.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "BlocksAttacksMixin",
     "CreeperMixin",
     "EnderPearlDamageMixin",
     "EnderpearlItemMixin",
@@ -12,8 +13,7 @@
     "GameRulesMixin",
     "LeashableMixin",
     "PlayerMixin",
-    "accessors.GameRulesInvoker",
-    "accessors.IntegerValueInvoker"
+    "accessors.GameRulesInvoker"
   ],
   "injectors": {
     "defaultRequire": 1

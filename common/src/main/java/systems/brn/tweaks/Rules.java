@@ -1,21 +1,20 @@
 package systems.brn.tweaks;
 
-import net.minecraft.world.flag.FeatureFlagSet;
-import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.gamerules.GameRule;
+import net.minecraft.world.level.gamerules.GameRuleCategory;
 import systems.brn.tweaks.mixin.accessors.GameRulesInvoker;
-import systems.brn.tweaks.mixin.accessors.IntegerValueInvoker;
 
 public final class Rules {
-    public static GameRules.Key<GameRules.IntegerValue> ENTITY_PORTAL_COOLDOWN;
-    public static GameRules.Key<GameRules.IntegerValue> ENDER_PEARL_DAMAGE;
-    public static GameRules.Key<GameRules.IntegerValue> SHIELD_AXE_COOLDOWN;
-    public static GameRules.Key<GameRules.IntegerValue> CRITICAL_MULTIPLIER;
-    public static GameRules.Key<GameRules.IntegerValue> CREEPER_FUSE_TIME;
-    public static GameRules.Key<GameRules.IntegerValue> ENDER_PEARL_POWER;
-    public static GameRules.Key<GameRules.IntegerValue> ENDER_PEARL_DIVERGENCE;
-    public static GameRules.Key<GameRules.IntegerValue> ENDER_EYE_POP_CHANCE;
-    public static GameRules.Key<GameRules.IntegerValue> LEASH_BREAK_DISTANCE;
-    public static GameRules.Key<GameRules.IntegerValue> LEASH_ELASTIC_DISTANCE;
+    public static GameRule<Integer> ENTITY_PORTAL_COOLDOWN;
+    public static GameRule<Integer> ENDER_PEARL_DAMAGE;
+    public static GameRule<Integer> SHIELD_AXE_COOLDOWN;
+    public static GameRule<Integer> CRITICAL_MULTIPLIER;
+    public static GameRule<Integer> CREEPER_FUSE_TIME;
+    public static GameRule<Integer> ENDER_PEARL_POWER;
+    public static GameRule<Integer> ENDER_PEARL_DIVERGENCE;
+    public static GameRule<Integer> ENDER_EYE_POP_CHANCE;
+    public static GameRule<Integer> LEASH_BREAK_DISTANCE;
+    public static GameRule<Integer> LEASH_ELASTIC_DISTANCE;
 
     private static boolean registered;
 
@@ -27,20 +26,19 @@ public final class Rules {
             return;
         }
         registered = true;
-        ENTITY_PORTAL_COOLDOWN = integer("entityPortalCooldown", GameRules.Category.MOBS, 300, 0, Integer.MAX_VALUE);
-        ENDER_PEARL_DAMAGE = integer("enderPearlDamage", GameRules.Category.PLAYER, 5, 0, Integer.MAX_VALUE);
-        SHIELD_AXE_COOLDOWN = integer("shieldAxeCooldown", GameRules.Category.PLAYER, 100, 0, Integer.MAX_VALUE);
-        CRITICAL_MULTIPLIER = integer("criticalHitMultiplier", GameRules.Category.PLAYER, 150, 0, Integer.MAX_VALUE);
-        CREEPER_FUSE_TIME = integer("creeperDefaultFuseTime", GameRules.Category.MOBS, 30, 0, Integer.MAX_VALUE);
-        ENDER_PEARL_POWER = integer("enderPearlPower", GameRules.Category.PLAYER, 150, 0, Integer.MAX_VALUE);
-        ENDER_PEARL_DIVERGENCE = integer("enderPearlDivergence", GameRules.Category.PLAYER, 100, 0, Integer.MAX_VALUE);
-        ENDER_EYE_POP_CHANCE = integer("enderEyePopChance", GameRules.Category.PLAYER, 20, 0, 100);
-        LEASH_BREAK_DISTANCE = integer("leashBreakDistance", GameRules.Category.MOBS, 10, 0, Integer.MAX_VALUE);
-        LEASH_ELASTIC_DISTANCE = integer("leashElasticDistance", GameRules.Category.MOBS, 6, 0, Integer.MAX_VALUE);
+        ENTITY_PORTAL_COOLDOWN = integer("entity_portal_cooldown", GameRuleCategory.MOBS, 300, 0, Integer.MAX_VALUE);
+        ENDER_PEARL_DAMAGE = integer("ender_pearl_damage", GameRuleCategory.PLAYER, 5, 0, Integer.MAX_VALUE);
+        SHIELD_AXE_COOLDOWN = integer("shield_axe_cooldown", GameRuleCategory.PLAYER, 100, 0, Integer.MAX_VALUE);
+        CRITICAL_MULTIPLIER = integer("critical_hit_multiplier", GameRuleCategory.PLAYER, 150, 0, Integer.MAX_VALUE);
+        CREEPER_FUSE_TIME = integer("creeper_default_fuse_time", GameRuleCategory.MOBS, 30, 0, Integer.MAX_VALUE);
+        ENDER_PEARL_POWER = integer("ender_pearl_power", GameRuleCategory.PLAYER, 150, 0, Integer.MAX_VALUE);
+        ENDER_PEARL_DIVERGENCE = integer("ender_pearl_divergence", GameRuleCategory.PLAYER, 100, 0, Integer.MAX_VALUE);
+        ENDER_EYE_POP_CHANCE = integer("ender_eye_pop_chance", GameRuleCategory.PLAYER, 20, 0, 100);
+        LEASH_BREAK_DISTANCE = integer("leash_break_distance", GameRuleCategory.MOBS, 12, 0, Integer.MAX_VALUE);
+        LEASH_ELASTIC_DISTANCE = integer("leash_elastic_distance", GameRuleCategory.MOBS, 6, 0, Integer.MAX_VALUE);
     }
 
-    private static GameRules.Key<GameRules.IntegerValue> integer(String name, GameRules.Category category, int def, int min, int max) {
-        return GameRulesInvoker.tweaks$register(name, category, IntegerValueInvoker.tweaks$create(def, min, max, FeatureFlagSet.of(), (server, value) -> {
-        }));
+    private static GameRule<Integer> integer(String name, GameRuleCategory category, int def, int min, int max) {
+        return GameRulesInvoker.tweaks$registerInteger(name, category, def, min, max);
     }
 }

@@ -19,7 +19,7 @@ public abstract class CreeperMixin {
     @Inject(method = "<init>", at = @At("TAIL"))
     private void tweaks$fuseTime(EntityType<? extends Creeper> type, Level level, CallbackInfo ci) {
         if (level instanceof ServerLevel serverLevel) {
-            this.maxSwell = serverLevel.getGameRules().getInt(Rules.CREEPER_FUSE_TIME);
+            this.maxSwell = serverLevel.getGameRules().get(Rules.CREEPER_FUSE_TIME);
         }
     }
 }

@@ -17,8 +17,8 @@ public abstract class EnderpearlItemMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/projectile/Projectile;spawnProjectileFromRotation(Lnet/minecraft/world/entity/projectile/Projectile$ProjectileFactory;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/LivingEntity;FFF)Lnet/minecraft/world/entity/projectile/Projectile;")
     )
     private <T extends Projectile> T tweaks$velocity(Projectile.ProjectileFactory<T> factory, ServerLevel level, ItemStack stack, LivingEntity shooter, float yaw, float power, float divergence) {
-        float newPower = level.getGameRules().getInt(Rules.ENDER_PEARL_POWER) / 100f;
-        float newDivergence = level.getGameRules().getInt(Rules.ENDER_PEARL_DIVERGENCE) / 100f;
+        float newPower = level.getGameRules().get(Rules.ENDER_PEARL_POWER) / 100f;
+        float newDivergence = level.getGameRules().get(Rules.ENDER_PEARL_DIVERGENCE) / 100f;
         return Projectile.spawnProjectileFromRotation(factory, level, stack, shooter, yaw, newPower, newDivergence);
     }
 }
