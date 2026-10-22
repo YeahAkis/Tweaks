@@ -12,8 +12,8 @@ import systems.brn.tweaks.Rules;
 public abstract class EnderPearlDamageMixin {
     @ModifyArg(
             method = "onHit",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerPlayer;hurtServer(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;F)Z"),
-            index = 2
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"),
+            index = 1
     )
     private float tweaks$damage(float original) {
         if (((Entity) (Object) this).level() instanceof ServerLevel level) {

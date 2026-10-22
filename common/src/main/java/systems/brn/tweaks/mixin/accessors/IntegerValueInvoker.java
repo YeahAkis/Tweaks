@@ -1,7 +1,6 @@
 package systems.brn.tweaks.mixin.accessors;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
@@ -11,7 +10,7 @@ import java.util.function.BiConsumer;
 @Mixin(GameRules.IntegerValue.class)
 public interface IntegerValueInvoker {
     @Invoker("create")
-    static GameRules.Type<GameRules.IntegerValue> tweaks$create(int def, int min, int max, FeatureFlagSet flags, BiConsumer<MinecraftServer, GameRules.IntegerValue> changeListener) {
+    static GameRules.Type<GameRules.IntegerValue> tweaks$create(int def, int min, int max, BiConsumer<MinecraftServer, GameRules.IntegerValue> changeListener) {
         throw new AssertionError();
     }
 }

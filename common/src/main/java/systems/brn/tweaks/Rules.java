@@ -1,6 +1,5 @@
 package systems.brn.tweaks;
 
-import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.level.GameRules;
 import systems.brn.tweaks.mixin.accessors.GameRulesInvoker;
 import systems.brn.tweaks.mixin.accessors.IntegerValueInvoker;
@@ -40,7 +39,7 @@ public final class Rules {
     }
 
     private static GameRules.Key<GameRules.IntegerValue> integer(String name, GameRules.Category category, int def, int min, int max) {
-        return GameRulesInvoker.tweaks$register(name, category, IntegerValueInvoker.tweaks$create(def, min, max, FeatureFlagSet.of(), (server, value) -> {
+        return GameRulesInvoker.tweaks$register(name, category, IntegerValueInvoker.tweaks$create(def, min, max, (server, value) -> {
         }));
     }
 }
