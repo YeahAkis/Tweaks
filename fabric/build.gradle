@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom'
+    id 'net.fabricmc.fabric-loom'
 }
 
 base {
@@ -13,8 +13,7 @@ sourceSets.main {
 
 dependencies {
     minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
-    mappings loom.officialMojangMappings()
-    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader}"
+    implementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader}"
 }
 
 processResources {
@@ -30,7 +29,7 @@ processResources {
     }
 }
 
-ext.publishFile = tasks.remapJar.archiveFile
+ext.publishFile = tasks.jar.archiveFile
 ext.publishSuffix = 'fabric'
 ext.publishLabel = 'Fabric and Quilt'
 ext.publishLoaders = ['fabric', 'quilt']
