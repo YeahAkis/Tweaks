@@ -1,0 +1,9 @@
+name: Tweaks
+version: ${version}
+main: systems.brn.tweaks.paper.TweaksPlugin
+bootstrapper: systems.brn.tweaks.paper.TweaksBootstrap
+api-version: '${api}'
+authors: [BRNSystems, Akis]
+website: https://github.com/YeahAkis/Tweaks
+description: Change vanilla values like ender pearl damage, creeper fuse time and leash distance with real gamerules
+folia-supported: true

@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+    id 'io.papermc.paperweight.userdev' version '2.0.0-beta.24'
+}
+
+base {
+    archivesName = "${rootProject.mod_id}-paper"
+}
+
+repositories {
+    maven { url = 'https://repo.papermc.io/repository/maven-public/' }
+}
+
+dependencies {
+    paperweight.paperDevBundle("${rootProject.paper_version}-R0.1-SNAPSHOT")
+}
+
+paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.getMOJANG_PRODUCTION()
+
+processResources {
+    def props = [
+            version: project.version,
+            api    : rootProject.paper_api
+    ]
+    inputs.properties props
+    filesMatching('paper-plugin.yml') {
+        expand props
+    }
+}
