@@ -14,15 +14,12 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.EntityUnleashEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.entity.PlayerLeashEntityEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.plugin.Plugin;
 
-import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -32,7 +29,6 @@ public class TweakListener implements Listener {
     private static final int VANILLA_PORTAL_COOLDOWN = 300;
 
     private final Set<UUID> watched = ConcurrentHashMap.newKeySet();
-    private final Map<UUID, Long> pearlLandings = new ConcurrentHashMap<>();
     private final Plugin plugin;
 
     public TweakListener(Plugin plugin) {
@@ -68,20 +64,9 @@ public class TweakListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onPearlTeleport(PlayerTeleportEvent event) {
-        if (event.getCause() == PlayerTeleportEvent.TeleportCause.ENDER_PEARL) {
-            pearlLandings.put(event.getPlayer().getUniqueId(), event.getPlayer().getWorld().getGameTime());
-        }
-    }
-
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-    public void onDamage(EntityDamageEvent event) {
-        if (event.getCause() != EntityDamageEvent.DamageCause.FALL) {
-            return;
-        }
-        Long landed = pearlLandings.remove(event.getEntity().getUniqueId());
-        if (landed == null || landed != event.getEntity().getWorld().getGameTime()) {
+    public void onDamage(EntityDamageByEntityEvent event) {
+        if (!(event.getDamager() instanceof EnderPearl)) {
             return;
         }
         int damage = Rules.get(event.getEntity().getWorld(), Rules.ENDER_PEARL_DAMAGE);
