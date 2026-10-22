@@ -20,6 +20,7 @@ import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.EntityUnleashEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.entity.PlayerLeashEntityEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.Plugin;
 
 import java.util.Set;
@@ -126,12 +127,18 @@ public class TweakListener implements Listener {
         int limit = Rules.get(mob.getWorld(), Rules.LEASH_BREAK_DISTANCE);
         if (mob.getLocation().distanceSquared(holder.getLocation()) <= (double) limit * limit) {
             event.setDropLeash(false);
+            LeashPackets.mark(mob, holder);
             mob.getScheduler().run(plugin, task -> {
                 if (holder.isValid() && mob.isValid()) {
                     mob.setLeashHolder(holder);
                 }
             }, null);
         }
+    }
+
+    @EventHandler
+    public void onJoin(PlayerJoinEvent event) {
+        LeashPackets.inject(event.getPlayer());
     }
 
     @EventHandler(ignoreCancelled = true)
