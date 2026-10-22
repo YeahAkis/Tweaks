@@ -4,7 +4,14 @@
   "package": "systems.brn.tweaks.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "CreeperMixin",
+    "EnderPearlDamageMixin",
+    "EnderpearlItemMixin",
+    "EntityPortalMixin",
+    "EyeOfEnderMixin",
     "GameRulesMixin",
+    "LeashableMixin",
+    "PlayerMixin",
     "accessors.GameRulesInvoker",
     "accessors.IntegerValueInvoker"
   ],
